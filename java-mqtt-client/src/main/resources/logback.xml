@@ -1,0 +1,18 @@
+<!-- -log only to console -/-->
+<!-- -log only to console -/-->
+<configuration scan="false">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%-10(%d %level)- %msg%n%ex</pattern>
+        </encoder>
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <logger name="com.hivemq" level="INFO"/>
+    <logger name="oshi" level="ERROR"/>
+    <logger name="jetbrains.exodus" level="WARN"/>
+    <logger name="com.google.common.util.concurrent.Futures.CombinedFuture" level="OFF"/>
+
+</configuration>

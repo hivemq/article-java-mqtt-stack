@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <topics group="climate-control"
+            description="topics get information about room temperature and control ">
+        <topic>
+            <name>room/</name>
+            <actions>pub,sub</actions>
+            <qos>1</qos>
+        </topic>
+        <topic>
+            <filter>room/+/temp</filter>
+            <actions>pub,sub</actions>
+            <qos>0,1</qos>
+        </topic>
+        <topic>
+            <filter>room/+/command</filter>
+            <actions>pub,sub</actions>
+            <qos>0,1</qos>
+        </topic>
+    </topics>
+</xml>
