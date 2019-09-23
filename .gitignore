@@ -21,3 +21,10 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/article-java-mqtt-stack.iml
+/.idea/
+/example/.idea/
+/example/mqtt-client-example.iml
+/java-mqtt-client/dependency-reduced-pom.xml
+/java-mqtt-client/backend-client.iml
+/java-mqtt-client/.idea/

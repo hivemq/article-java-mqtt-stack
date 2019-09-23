@@ -1,0 +1,6 @@
+Manifest-Version: 1.0.0
+Implementation-Title: HiveMQ Mqtt Library Example
+Implementation-Vendor: HiveMQ GmbH
+Implementation-Version: 1.0.0
+Main-Class: com.hivemq.mqttclient.example.ExampleMain
+
