@@ -4,6 +4,8 @@ import com.hivemq.client.mqtt.MqttClient;
 import com.hivemq.client.mqtt.datatypes.MqttQos;
 import com.hivemq.client.mqtt.datatypes.MqttTopicFilter;
 import com.hivemq.client.mqtt.mqtt5.Mqtt5AsyncClient;
+import com.hivemq.client.mqtt.mqtt5.Mqtt5BlockingClient;
+import com.hivemq.client.mqtt.mqtt5.message.connect.connack.Mqtt5ConnAck;
 import com.hivemq.client.mqtt.mqtt5.message.publish.Mqtt5Publish;
 import com.hivemq.client.mqtt.mqtt5.message.subscribe.Mqtt5Subscription;
 import org.pmw.tinylog.Logger;
@@ -24,27 +26,21 @@ public class ClimateBackend {
     }
 
     public void startClimateControllerBackend() {
-        final Mqtt5AsyncClient client = MqttClient.builder()
+        final Mqtt5BlockingClient client = MqttClient.builder()
                 .serverHost(BROKER_HIVEMQ_ADR)
                 .serverPort(BROKER_HIVEMQ_PORT)
                 .useMqttVersion5()
                 .identifier(CLIMATE_CONTROLLER_BACKEND)
-                .buildAsync();
+                .buildBlocking();
 
-        client.connectWith()
-                .keepAlive(KEEP_ALIVE)
-                .send()
-                .whenComplete((connAck, throwable) -> {
-                    if (throwable != null) {
-                        Logger.error("Connect client {} failed with reason: {}  ",
-                                client.getConfig().getClientIdentifier().get(), throwable.getMessage());
-                    } else {
-                        Logger.info("Connect client {} " , client.getConfig().getClientIdentifier().get());
-                        doSubscribeToRooms(client);
-                    }
-                });
+        Mqtt5ConnAck ack = client.connect();
 
-        addDisconnectOnRuntimeShutDownHock(client);
+        if( ack.getReasonCode().isError() ) {
+            //do error handling
+        }
+        doSubscribeToRooms(client.toAsync());
+
+        addDisconnectOnRuntimeShutDownHock(client.toAsync());
     }
 
     private void doSubscribeToRooms(Mqtt5AsyncClient client) {
