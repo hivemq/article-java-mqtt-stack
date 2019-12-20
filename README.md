@@ -20,7 +20,7 @@ for building a full stack MQTT solution with java based open source components.
 * Start Main class from java-mqtt-client via IDE or as
 `java -jar java-mqtt-client/target/backend-client-1.0-SNAPSHOT.jar `
 
-### MQTT Client Interface
+### MQTT Command Line Interface
 * Get a package of your choice from HiveMQ-CLI via [MQTT CLI github](https://github.com/hivemq/mqtt-cli)
 * Install mqtt-cli or build the jar (gradle build)
 * Run the script `example-devices.sh ` 
